@@ -1,14 +1,4 @@
-# Dependency directories
-node_modules
-/node_modules
 node_modules/
-# Sqlite databases
-*.sqlite3
 
-# misc
-.DS_Store
-.env
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Local Netlify folder
+.netlify
