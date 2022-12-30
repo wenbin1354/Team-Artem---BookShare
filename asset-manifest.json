@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Team-Artem---BookShare/static/css/main.a6fdb26c.css",
-    "main.js": "/Team-Artem---BookShare/static/js/main.9c464fd2.js",
+    "main.js": "/Team-Artem---BookShare/static/js/main.d79c3b6c.js",
     "static/media/colleges.csv": "/Team-Artem---BookShare/static/media/colleges.f5b32f613a133855aa7b.csv",
     "static/media/majors.csv": "/Team-Artem---BookShare/static/media/majors.bbdf08b862500a97e847.csv",
     "index.html": "/Team-Artem---BookShare/index.html",
     "main.a6fdb26c.css.map": "/Team-Artem---BookShare/static/css/main.a6fdb26c.css.map",
-    "main.9c464fd2.js.map": "/Team-Artem---BookShare/static/js/main.9c464fd2.js.map"
+    "main.d79c3b6c.js.map": "/Team-Artem---BookShare/static/js/main.d79c3b6c.js.map"
   },
   "entrypoints": [
     "static/css/main.a6fdb26c.css",
-    "static/js/main.9c464fd2.js"
+    "static/js/main.d79c3b6c.js"
   ]
 }
