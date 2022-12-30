@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Team-Artem---BookShare/static/css/main.d1089b75.css",
-    "main.js": "/Team-Artem---BookShare/static/js/main.b5e4bb34.js",
-    "static/media/colleges.csv": "/Team-Artem---BookShare/static/media/colleges.845afcbe9629461f393c.csv",
-    "static/media/majors.csv": "/Team-Artem---BookShare/static/media/majors.d93ae8df69f4183b465f.csv",
+    "main.css": "/Team-Artem---BookShare/static/css/main.a6fdb26c.css",
+    "main.js": "/Team-Artem---BookShare/static/js/main.9c464fd2.js",
+    "static/media/colleges.csv": "/Team-Artem---BookShare/static/media/colleges.f5b32f613a133855aa7b.csv",
+    "static/media/majors.csv": "/Team-Artem---BookShare/static/media/majors.bbdf08b862500a97e847.csv",
     "index.html": "/Team-Artem---BookShare/index.html",
-    "main.d1089b75.css.map": "/Team-Artem---BookShare/static/css/main.d1089b75.css.map",
-    "main.b5e4bb34.js.map": "/Team-Artem---BookShare/static/js/main.b5e4bb34.js.map"
+    "main.a6fdb26c.css.map": "/Team-Artem---BookShare/static/css/main.a6fdb26c.css.map",
+    "main.9c464fd2.js.map": "/Team-Artem---BookShare/static/js/main.9c464fd2.js.map"
   },
   "entrypoints": [
-    "static/css/main.d1089b75.css",
-    "static/js/main.b5e4bb34.js"
+    "static/css/main.a6fdb26c.css",
+    "static/js/main.9c464fd2.js"
   ]
 }
