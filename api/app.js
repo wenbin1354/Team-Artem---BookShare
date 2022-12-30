@@ -1,95 +1,50 @@
-//import database setup utils
-const createDB = require('./database/utils/createDB');
-const seedDB = require('./database/utils/seedDB');
+const express = require("express");
+const expressSession = require("express-session");
+const morgan = require("morgan");
+const passport = require("./middlewares/authentication");
+const path = require("path");
+const db = require("./models");
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-//import Sequelize instance
-const db = require('./database');
+// this lets us parse 'application/json' content in http requests
+app.use(express.json());
 
-//sync and seed
-const syncDatabase = async () => {
-  try {
-    //the {force: true} option will clear the database tables
-    //every time we restart the server
-    //remove the option if you want the data to persist, ie: 
-    //await db.sync();
+// setup passport and session cookies
+app.use(
+  expressSession({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-    await db.sync({force: true});
-    console.log('------Synced to db--------')
-    await seedDB();
-    console.log('--------Successfully seeded db--------');
-  } catch (err) {
-    console.error('syncDB error:', err);
-  }  
+// add http request logging to help us debug and audit app use
+const logFormat = process.env.NODE_ENV === "production" ? "combined" : "dev";
+app.use(morgan(logFormat));
+
+// this mounts controllers/index.js at the route `/api`
+app.use("/api", require("./controllers"));
+
+// for production use, we serve the static react build folder
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  // all unknown routes should be handed to our react app
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
 }
 
-//import express library
-const express = require("express");
+// update DB tables based on model updates. Does not handle renaming tables/columns
+// NOTE: toggling this to true drops all tables (including data)
+db.sequelize.sync({ force: false });
 
-//create express server
-const app = express();
-
-//express router: import routes we defined
-const apiRouter = require('./routes');
-
-//initialize express server
-const cors = require('cors')
-
-const configureApp = async () => {
-  // handle request data
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
-  //ignore browser requests for favicon file
-  app.get('/favicon.ico', (req, res) => res.status(204));
-
-
-  //define a route
-  app.get("/hello", (request, response) => {
-    response.send("hello world!")
-  });
-
-   // Mount apiRouter
-   app.use("/api", apiRouter);
-
-
-  // Handle page not found:
-  // gets triggered when a request is made to
-  // an undefined route 
-  app.use((req, res, next) => {
-    const error = new Error("Not Found, Please Check URL!");
-    error.status = 404;
-    next(error);
-  });
-
-  // Error-handling middleware: 
-  // all express errors get passed to this
-  // when next(error) is called 
-  app.use((err, req, res, next) => {
-    console.error(err);
-    console.log(req.originalUrl);
-    res.status(err.status || 500).send(err.message || "Internal server error.");
-  });
-
-};
-
-const bootApp = async () => {
-  //creates local database if it doesn't exist
-  await createDB();
-
-  //calls sync which is a Sequelize method that creates the database tables
-  //calls seedDB which will insert initial data into the tables
-  await syncDatabase();
-
-  //express setup - define routes and middleware
-  await configureApp();
-};
-
-
-// PROGRAM STARTS HERE
-
-
-bootApp();
-
-
-const PORT = 5001;
-app.listen(PORT, console.log(`Server started on ${PORT}`));
+// start up the server
+if (PORT) {
+  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+} else {
+  console.log("===== ERROR ====\nCREATE A .env FILE!\n===== /ERROR ====");
+}

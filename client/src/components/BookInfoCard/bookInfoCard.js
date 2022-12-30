@@ -1,6 +1,6 @@
 import React from "react";
 import "./bookInfoCard.css"
-import ProfileCard from "./UserProfileCard/profileCard";
+import ProfileCard from "../UserProfileCard/profileCard";
 
 function BookInfoCard(props){
     const bookInfo = 
@@ -10,7 +10,7 @@ function BookInfoCard(props){
                 <div className="col"> 
                     <div className="row">
                         <div className="col">
-                            <img className="image-container" src={props.bookImage} alt="book"/>
+                            <img className="image-container" src={props.bookImage? props.bookImage: "https://d827xgdhgqbnd.cloudfront.net/wp-content/uploads/2016/04/09121712/book-cover-placeholder.png"} alt="book"/>
                         </div>
                         <div className="col"> 
                             <h6>{props.title}</h6>  
@@ -20,7 +20,7 @@ function BookInfoCard(props){
                 
                 </div>
                 <div className="col"> {props.date} </div>
-                <div className="col"> <ProfileCard profileName={props.profileName} profileImage={props.profileImage} /> </div>
+                <div className="col"> <ProfileCard user={props.profileName} profileImage={props.profileImage} /> </div>
             </div>
         </div>
     </div>
@@ -68,10 +68,10 @@ const bookInfoReturnBook =
         
         </div>
         <div className="col"> {props.date} </div>
-        <div className="col"> <ProfileCard profileName={props.profileName} profileImage={props.profileImage} /> </div>
+        <div className="col"> <ProfileCard user={props.profileName} profileImage={props.profileImage} /> </div>
     </div>
     <div className="row">
-        <div className="col"> <button>Return Book</button> </div>
+        {props.owner && <div className="col"> <button>Return Book</button> </div>}
     </div>
 </div>
 </div>
