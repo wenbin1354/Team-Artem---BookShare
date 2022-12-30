@@ -1,7 +1,6 @@
 {
 	"name": "bookshare",
 	"version": "0.1.0",
-	"homepage": "https://wenbin1354.github.io/Team-Artem---BookShare",
 	"private": true,
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.2.1",

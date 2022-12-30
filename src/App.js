@@ -1,5 +1,5 @@
 import "./App.css";
-import { HashRouter as BrowserRouter, BrowserRouter, Routes, Route } from "react-router-dom";
+import {HashRouter ,BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRouteRequiresAuth from "./components/PrivateRouteRequiresAuth";
@@ -19,7 +19,7 @@ import ProfilePage from "./pages/ProfilePage";
 function App() {
 	return (
 		<AuthProvider>
-			<BrowserRouter>
+			<HashRouter>
 				<Routes>
 					<Route path="/" element={<DefaultPage />} />
 					<Route path="/login" element={<LoginPage />} />
@@ -85,7 +85,7 @@ function App() {
 						}
 					/>
 				</Routes>
-			</BrowserRouter>
+			</HashRouter>
 		</AuthProvider>
 	);
 }
